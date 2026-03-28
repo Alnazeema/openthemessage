@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Message for Papa</title>
+    <style>
+        :root {
+            --bg: #0a0e14;
+            --card-bg: #161b22;
+            --border: #30363d;
+            --text: #c9d1d9;
+            --green: #238636;
+            --blue: #58a6ff;
+            --accent: #ff7b72;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Entry Screen to enable Audio */
+        #overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            max-height: 80vh;
+        }
+
+        .terminal-header {
+            padding: 12px 20px;
+            background: #21262d;
+            border-bottom: 1px solid var(--border);
+            display: flex; gap: 8px;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green-dot { background: #27c93f; }
+
+        .scroll-content {
+            padding: 40px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .scroll-content::-webkit-scrollbar { width: 6px; }
+        .scroll-content::-webkit-scrollbar-track { background: var(--bg); }
+        .scroll-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+        .slide { display: none; animation: fadeIn 1s ease; }
+        .active { display: block; }
+
+        p { line-height: 1.8; font-size: 1.15rem; white-space: pre-line; margin-bottom: 25px; }
+
+        .btn-wrapper { text-align: center; margin-top: 10px; }
+
+        .btn {
+            background: var(--green);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: 'Segoe UI', sans-serif;
+            transition: 0.3s;
+        }
+        .btn:hover { background: #2ea043; transform: scale(1.05); }
+
+        .heart { position: fixed; top: -10%; pointer-events: none; animation: fall linear forwards; z-index: 100; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<audio id="bgMusic" loop preload="auto">
+    <source src="Dude  Orchestral Suite.mp3" type="audio/mpeg">
+</audio>
+
+<div id="overlay">
+    <p style="margin-bottom: 20px; font-style: italic; color: var(--blue);">A message for you, Papa.</p>
+    <button class="btn" onclick="startStory()">Open Letter</button>
+</div>
+
+<div class="container">
+    <div class="terminal-header">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green-dot"></div>
+    </div>
+
+    <div class="scroll-content">
+        <div id="slide1" class="slide active">
+            <p>“Papa, I want to tell you something honestly…
+            Lately, I’ve been struggling a lot in my mind. Seeing everyone moving forward with their degree while I’m still trying to find my way made me feel lost and low. Because of that, I couldn’t face anyone—even you.
+
+            It wasn’t that I didn’t care… it’s just that I didn’t know how to handle what I was feeling.
+
+            I’m really sorry for distancing myself and for any pain or confusion I caused you. You mean so much to me, and I never wanted to hurt you like this.
+
+            I’m trying to get better, slowly… and I hope you can understand me and forgive me.”</p>
+            <div class="btn-wrapper"><button class="btn" onclick="nextSlide(1)">Next</button></div>
+        </div>
+
+        <div id="slide2" class="slide">
+            <p>No matter how hard things get in my life, I won’t disappear like this again. I won’t let my struggles push away the people who truly care about me—especially you.
+
+            I promise to be stronger, not perfect… but stronger enough to face things and to stay connected with you.
+            I promise to share my pain instead of hiding it, and to trust you with my real feelings.
+
+            And most importantly… I promise that I’ll never take you for granted, because you are someone I never want to lose.
+            I may still be finding my way in life, but one thing I’m sure about is this—
+
+            I want you to be a part of my journey, always.
+            This is my promise to you.”</p>
+            <div class="btn-wrapper"><button class="btn" onclick="nextSlide(2)">Next</button></div>
+        </div>
+
+        <div id="slide3" class="slide">
+            <p>No matter where life takes me… even if I get married and start a new chapter, I promise you this—
+            I will never leave you.
+
+            You are not just my friend, you are a part of my life that can never be replaced. Time, distance, or anything else will never change that.
+            You are my lifetime friend, and I will always be there for you—just like I hope you’ll always be there for me.
+
+            Some bonds aren’t temporary… ours is forever.”</p>
+            <div class="btn-wrapper"><button class="btn" onclick="nextSlide(3)">Next</button></div>
+        </div>
+
+        <div id="slide4" class="slide">
+            <p>Sorry…
+            Sorry for everything…
+            Sorry for the pain, the silence, and the distance…
+
+            I truly mean it from my heart.
+            And no matter what happens—
+
+            my love and care for you will never change.
+            Love you forever, Papa.”</p>
+            
+            <div class="btn-wrapper">
+                <button class="btn" id="forgive-btn" onclick="celebrate()">forgive_and_reset()</button>
+                <h3 id="final-msg" style="display:none; color: var(--accent); margin-top: 20px;">❤️ I love you forever, Papa ❤️</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const music = document.getElementById('bgMusic');
+
+    function startStory() {
+        document.getElementById('overlay').style.display = 'none';
+        // Force the music to play
+        music.play().catch(function(error) {
+            console.log("Music play failed. Make sure the file is in the same folder.");
+        });
+    }
+
+    function nextSlide(current) {
+        document.getElementById('slide' + current).classList.remove('active');
+        document.getElementById('slide' + (current + 1)).classList.add('active');
+        document.querySelector('.scroll-content').scrollTop = 0;
+    }
+
+    function celebrate() {
+        document.getElementById('forgive-btn').style.display = 'none';
+        document.getElementById('final-msg').style.display = 'block';
+        for (let i = 0; i < 75; i++) { setTimeout(createHeart, i * 50); }
+    }
+
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '❤️';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.fontSize = (Math.random() * 25 + 15) + 'px';
+        heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+    }
+</script>
+
+</body>
+</html>
